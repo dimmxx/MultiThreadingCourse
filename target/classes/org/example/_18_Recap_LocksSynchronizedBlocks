@@ -1,0 +1,9 @@
+Locks and Synchronized Blocks
+
+A reentrant lock has the same basic behavior as we have seen for
+synchronized blocks (with some extended features):
+
+- we can make a lock fair: prevent thread starvation. Synchronized blocks are unfair by default
+- we can check whether the given lock is held or not with reentrant locks
+- we can get the list of threads waiting for the given lock with reentrant locks
+- synchronized blocks are nicer: we do not need the try-catch-finally block
