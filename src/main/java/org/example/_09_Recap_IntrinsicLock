@@ -1,0 +1,23 @@
+Intrinsic Lock (Monitor)
+
+- every object in Java has a so-called intrinsic lock
+
+- a thread that needs exclusive and consistent access to an object's fields
+has to acquire the object's intrinsic lock before accessing them,
+and then release the intrinsic lock when it's done with them
+
+- because of the monitor lock: no 2 threads can execute the same
+synchronized method at the same time
+
+- a thread owns the intrinsic lock between the time it has acquired the lock and released the lock
+
+- as long as a thread owns an intrinsic lock no other thread can acquire the same lock.
+The other thread will be blocked when it attempts to acquire the lock.
+
+THE PROBLEM IS THAT EVERY OBJECT HAS A SINGLE MONITOR LOCK
+
+- if we have 2 independent synchronized methods then
+threads have to wait for each other to release the lock
+
+
+
