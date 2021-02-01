@@ -1,6 +1,6 @@
 package org.example;
 
-//using blocking on different objects, different intrinsic(monitors) locks
+//using blocking on different objects, different intrinsic(monitor) locks
 //are used and the app runs much more faster
 
 import java.time.Duration;
