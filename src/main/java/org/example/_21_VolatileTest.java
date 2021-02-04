@@ -6,7 +6,8 @@ import java.util.logging.Logger;
 public class _21_VolatileTest {
 
     private static final Logger LOGGER = Logger.getLogger(_21_VolatileTest.class.getName());
-    private static volatile int MY_INT = 0;
+    private static int MY_INT = 0;
+    //private static volatile int MY_INT = 0;
 
     public static void main(String[] args) {
         new ChangeListener().start();
