@@ -59,8 +59,8 @@ public class Deadlock {
         lock1.lock();
         System.out.println("Worker2 acquires the lock1...");
 
-        lock1.unlock();
-        lock2.unlock();
+        //lock1.unlock();
+        //lock2.unlock();
 
     }
 
