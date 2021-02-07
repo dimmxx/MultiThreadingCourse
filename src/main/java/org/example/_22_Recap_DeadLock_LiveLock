@@ -1,4 +1,18 @@
-Livelock
+==== Deadlock ====
+
+Deadlock occurs when two or more threads wait forever for a lock or resource held by another of the threads
+- deadlock is a situation in which two or more competing actions are each
+waiting for the other to finish, and thus neither ever does
+
+1) Deadlock in databases:
+Deadlock happens when two processes each within its own transaction updates two rows of information but in the opposite order.
+For example: process A updates row 1 then row 2 in the exact timeframe that process B updates row 2 then row 1;
+
+2) Deadlock in operating systems:
+Deadlock is a situation which occurs when a process or thread enters a waiting state because a resource requested
+is being held by another waiting process, which in turn is waiting for another resource held by another waiting process;
+
+==== Livelock ====
 
 - a thread often acts in response to the action of another thread
 
@@ -14,7 +28,7 @@ his left to let B pass, while B moves to his right to let A pass. They are still
 blocking each other, A moves to his right, while B moves to his left ... still not
 good
 
-How to handle Dead Lock and Live Lock
+=== How to handle Dead Lock and Live Lock ====
 
 1) we should make sure that a thread does not block infinitely if it is
 unable to acquire a lock
