@@ -3,14 +3,14 @@ package org.example;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Deadlock {
+public class _22_Deadlock {
 
     private Lock lock1 = new ReentrantLock(true);
     private Lock lock2 = new ReentrantLock(true);
 
     public static void main(String[] args) {
 
-        Deadlock deadlock = new Deadlock();
+        _22_Deadlock deadlock = new _22_Deadlock();
 
         Thread thread1 = new Thread(new Runnable() {
             @Override
@@ -28,8 +28,6 @@ public class Deadlock {
 
         thread1.start();
         thread2.start();
-
-
     }
 
     public void worker1(){
@@ -61,8 +59,5 @@ public class Deadlock {
 
         //lock1.unlock();
         //lock2.unlock();
-
     }
-
-
 }

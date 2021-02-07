@@ -7,21 +7,29 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class _18_ReentrantLockExample1 {
-    final int TIME_WAIT = 7000;
-    final int TIME_SLEEP = 5000;
+    private final int TIME_WAIT = 2000;
+    private final int TIME_SLEEP = 5000;
 
-    String resource = "Hello, World!";
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss  ");
-    Lock lock;
+    private String resource = "Hello, World!";
+    private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss:SS ");
+    private Lock lock;
 
     _18_ReentrantLockExample1() {
         lock = new ReentrantLock();
         Thread thread1;
         Thread thread2;
-        thread1 = new Thread(new LockClass("first",
-                "Первый поток"));
-        thread2 = new Thread(new LockClass("second",
-                "Второй поток"));
+
+        String thread1Name = "first_thread";
+        String thread2Name = "second_thread";
+
+        thread1 = new Thread(new LockClass(thread1Name,
+                "text: the first thread"));
+        thread2 = new Thread(new LockClass(thread2Name,
+                "text: the second thread"));
+
+        thread1.setName(thread1Name);
+        thread2.setName(thread2Name);
+
         thread1.start();
         thread2.start();
 
@@ -34,29 +42,33 @@ public class _18_ReentrantLockExample1 {
                 e.printStackTrace();
             }
         }
-        System.out.println("\nЗавершение работы примера");
+        System.out.println(sdf.format(new Date()) + "[" + System.nanoTime() + "] " + "Завершение работы примера");
+        System.out.println(">>> " + sdf.format(new Date()) + "[" + System.nanoTime() + "] "
+                + Thread.currentThread().getName() + " dies");
         System.exit(0);
     }
 
     //-----------------------------------------------------
     public static void main(String[] args) {
+        System.out.println(">>> " + sdf.format(new Date()) + "[" + System.nanoTime() + "] "
+                + Thread.currentThread().getName() + " starts");
         new _18_ReentrantLockExample1();
     }
 
     //-----------------------------------------------------
     void printMessage(final String msg) {
-        String text = sdf.format(new Date());
+        String time = sdf.format(new Date()) + "[" + System.nanoTime() + "] ";
         if (msg == null)
-            text += resource;
+            time += resource;
         else
-            text += msg;
-        System.out.println(text);
+            time += msg;
+        System.out.println(time);
     }
 
     //-----------------------------------------------------
     class LockClass implements Runnable {
-        String name;
-        String text;
+        private String name;
+        private String text;
 
         public LockClass(String name, String text) {
             this.name = name;
@@ -65,13 +77,20 @@ public class _18_ReentrantLockExample1 {
 
         @Override
         public void run() {
-            boolean locked = false;
+
+            System.out.println(">>> " + sdf.format(new Date()) + "[" + System.nanoTime() + "] "
+                    + Thread.currentThread().getName() + " starts");
+            boolean acquiredLock = false;
+            System.out.println(">>> " + sdf.format(new Date()) + "[" + System.nanoTime() + "] "
+                    + Thread.currentThread().getName() + " locked check1: " + acquiredLock);
             try {
                 // Получение блокировки в течение TIME_WAIT
-                locked = lock.tryLock(TIME_WAIT,
+                acquiredLock = lock.tryLock(TIME_WAIT,
                         TimeUnit.MILLISECONDS);
-                if (locked) {
-                    resource = text;
+                System.out.println(">>> " + sdf.format(new Date()) + "[" + System.nanoTime() + "] "
+                        + Thread.currentThread().getName() + " locked check2: " + acquiredLock);
+                if (acquiredLock) {
+                    resource = text + " acquired lock!!!";
                     printMessage(null);
                 }
                 Thread.sleep(TIME_SLEEP);
@@ -81,9 +100,13 @@ public class _18_ReentrantLockExample1 {
                 // Убираем блокировку
                 String text = name + " : завершил работу";
                 printMessage(text);
-                if (locked)
+                System.out.println(">>> " + sdf.format(new Date()) + "[" + System.nanoTime() + "] "
+                        + Thread.currentThread().getName() + " locked check3: " + acquiredLock);
+                if (acquiredLock)
                     lock.unlock();
             }
+            System.out.println(">>> " + sdf.format(new Date()) + "[" + System.nanoTime() + "] "
+                    + Thread.currentThread().getName() + " dies");
         }
     }
 }
