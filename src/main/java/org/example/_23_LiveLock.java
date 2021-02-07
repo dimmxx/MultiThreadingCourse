@@ -37,11 +37,13 @@ public class _23_LiveLock {
                 System.out.println("Worker1 can not acquire lock2...");
                 continue;
             }
+            System.out.println("Worker1 breaks free......................................");
             break;
         }
 
         lock1.unlock();
         lock2.unlock();
+        System.out.println("Worker1 dies :-(");
     }
 
     public void worker2(){
@@ -61,10 +63,12 @@ public class _23_LiveLock {
                 System.out.println("Worker2 can not acquire lock1...");
                 continue;
             }
+            System.out.println("Worker2 breaks free......................................");
             break;
         }
 
         lock1.unlock();
         lock2.unlock();
+        System.out.println("Worker2 dies :-(");
     }
 }
