@@ -1,0 +1,19 @@
+Mutexes (mutual exclusion objects)
+
+Mutual exclusion is a property of concurrency control which is instituted for the purpose of preventing race conditions
+
+- process synchronization plays an important role in maintaining the consistency of shared data (critical section problem)
+- mutex is very similar to a binary semaphore: while binary semaphore can be used as mutex, a mutex is a more specific use-case
+- a Lock is designed to enforce a mutual exclusion concurrency control policy
+
+Semaphores:
+- it is a signalling mechanism
+- threads and processes perform wait() and notify() operations to indicate whether they are acquiring or releasing the resource
+- semaphore allows multiple program threads to access the finite instance of resources (not just a single resource)
+- the process or thread blocks itself if no resource is free till the count of semaphore become greater than 0
+
+Mutexes:
+- mutex is a locking mechanism
+- threads or processes have to acquire the lock on mutex object if it wants to acquire the resource
+- mutex allows multiple program threads to access a single shared resource but one at a time
+- if the lock is already acquired by another thread or process then the thread will wait until the mutex object gets unlocked
