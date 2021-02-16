@@ -8,7 +8,7 @@ enum Downloader {
 
     INSTANCE;
 
-    private final Semaphore semaphore = new Semaphore(1, true);
+    private final Semaphore semaphore = new Semaphore(3, true);
 
     public void downloadData(){
         try {
@@ -19,10 +19,11 @@ enum Downloader {
         } finally {
             semaphore.release();
         }
+        System.out.println(Thread.currentThread().getName() + " dies");
     }
 
     private void download() {
-        System.out.println("Downloading data...");
+        System.out.println(Thread.currentThread().getName() + ": Downloading data...");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -42,5 +43,6 @@ public class _27_SemaphoreExample {
                 }
             });
         }
+        System.out.println(Thread.currentThread().getName() + " dies");
     }
 }
