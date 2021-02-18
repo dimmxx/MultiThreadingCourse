@@ -1,0 +1,13 @@
+In the previous lectures we have been talking about binary semaphores
+and mutexes. We have pointed out the fact that there are subtle
+differences between them. Let's consider the most critical difference again,
+the so-called principle of ownership.
+
+Ownership is the simple concept that when a task locks (acquires) a mutex only it can unlock (release) it
+
+- a mutex can be owned by at most one thread at any given time while
+on the other hand binary semaphore has no concept of ownership
+
+- if a task tries to unlock a mutex it hasn’t locked (thus doesn’t own) then an error condition is encountered and,
+most importantly, the mutex is not unlocked. If the mutual exclusion object doesn’t have ownership then,
+irrelevant of what it is called, it is not a mutex.
