@@ -24,7 +24,7 @@ public class App4 {
     public static void main(String[] args) {
 
        for (int j = 0; j < 5; j++){
-           new MyThread(String.valueOf(j));
+           new MyThread("Thread" + String.valueOf(j));
        }
 
         System.out.println(Thread.currentThread().getName() + " starts");
