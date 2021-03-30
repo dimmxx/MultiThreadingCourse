@@ -1,5 +1,10 @@
 package org.schildt;
 
+//Как только поток исполнения входит в любой синхронизированный метод экземпляра,
+//ни один другой поток исполнения не сможет войти в какой-нибудь другой
+//синхронизированный метод того же экземпляра.
+//Тем не менее несинхронизированные методы этого экземпляра по-прежнему остаются доступными для вызова.
+
 class CallMe {
     synchronized void call(String message) {
         System.out.print("[" + message);
@@ -39,7 +44,6 @@ class Sync {
         Caller caller1 = new Caller("Welcome to", callMe, 10);
         Caller caller3 = new Caller("world", callMe, 1);
         Caller caller2 = new Caller("synchronized", callMe, 10);
-
 
         try {
             caller1.thread.join();
